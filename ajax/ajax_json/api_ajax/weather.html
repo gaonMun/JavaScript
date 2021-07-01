@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!--weater API-->
+    <!--참조페이지 : OpenWeather-->
+    <img id="icon"/>
+    <div id="temp"></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $.ajax({
+            dataType:'json'
+            ,type:'GET'
+            ,url: 'https://api.openweathermap.org/data/2.5/weather?q=mokpo&appid=f399bb19c774558fa7bb66e5948f85d6'
+            ,data: {
+                q: 'Seoul'
+                ,appid: 'f399bb19c774558fa7bb66e5948f85d6'
+            }
+            ,success: weatherFunction
+            ,error: function(){
+                console.log("로그에 실패하였습니다.")
+            }
+        });
+
+        function weatherFunction(data){     /*collback함수*/
+            console.log(data);
+            
+            const icon = data.weather[0].icon;
+            $('#icon').attr("src",`http://openweathermap.org/img/wn/${icon}.png`);
+            $('#temp').html(data.coord.lat);
+        }
+           /* api_key는 OpenWeather 홈페이지에서 받아와야 한다 */
+           /* attr() : 요소의 속성 값을 가져오거나 속성을 추가한다 */
+    </script>
+</body>
+</html>
