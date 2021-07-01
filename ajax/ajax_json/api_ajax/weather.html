@@ -18,10 +18,10 @@
         $.ajax({
             dataType:'json'
             ,type:'GET'
-            ,url: 'https://api.openweathermap.org/data/2.5/weather?q=mokpo&appid=f399bb19c774558fa7bb66e5948f85d6'
+            ,url: 'https://api.openweathermap.org/data/2.5/weather?q=mokpo&appid={api_key/*수정필요*/}' 
             ,data: {
                 q: 'Seoul'
-                ,appid: 'f399bb19c774558fa7bb66e5948f85d6'
+                ,appid: '{api_key/*수정필요*/}'
             }
             ,success: weatherFunction
             ,error: function(){
