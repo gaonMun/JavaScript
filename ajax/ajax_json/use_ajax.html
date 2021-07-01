@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <select id="resultSelect">
+        <option value="Y">ajax 로드 성공</option>
+        <option value="N">ajax 로드 실패</option>
+    </select>
+
+    <button id ="btnShow"> Click! </button>
+
+    <div style="border: 1px solid teal" id="content">  </div>
+
+    <div style="border: 1px solid black;"> fixed content  dddd</div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $("#btnShow").click(function(){
+
+                var flag=$("#resultSelect").val();
+
+                console.log(flag);
+
+                if(flag=="Y"){
+                    url="list1.json"
+                }else{
+                    url="list2.json"
+                }
+
+                console.log(url);
+
+                $.ajax({
+                    url: url
+                    ,dataType: 'json'
+                    ,success: function(data){               //url의 json내용이 곧 data -> function(data) 는 function(url내의 json내용)
+                        if(data.flag="Y"){
+                            var result=data.data;
+                        }else{
+                            var result=data.data;
+                        }
+                        $("#content").html(data.data)
+                        console.log(result);
+                        console.log("data.flag:" + data.flag)
+                    }
+                })
+            });
+
+        });
+
+
+        /* json불러오기
+        참고 사이트: https://roqkffhwk.tistory.com/47
+        
+        오류
+        CORS policy: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, chrome-untrusted, https.
+        컴퓨터보완성문제때문에
+        */
+
+
+    </script>
+
+</body>
+</html>
