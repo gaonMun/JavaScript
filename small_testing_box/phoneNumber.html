@@ -1,0 +1,167 @@
+
+<style>
+
+    html, body {
+        margin: 0px;
+    }
+
+    .fullscreen {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+    }
+
+    header {
+        background-color: #F2EA79;
+        width: 100%;
+        height: 10vh;
+        text-align: center;
+        line-height: 600%;
+        margin-bottom: 100px;
+    }
+    .content {
+        width: 100%;
+        height: 100%;
+    }
+
+        .content #w_btn, #w_check {
+            width: 100vw;
+            height: 100vh;
+        }
+
+    .text_class {
+        display: flex;
+    }
+
+    #text_div {
+        height: 35px;
+        width: 55%;
+        text-align: center;
+        margin: 0 auto;
+        margin-bottom: 100px;
+        border: 0px;
+        border-bottom: 3px solid black;
+    }
+
+    .phone_box {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(max-content, 1fr));
+        width: 40%;
+        height: 30vh;
+    }
+
+    .items {
+        justify-content: center;
+        text-align: center;
+        margin: 1px;
+        background-color: #F2E85E;
+        line-height: 40px;
+    }
+
+
+
+</style>
+
+
+<div class="fullscreen">
+
+    <header class="head">
+        <div id="today"> 시간 </div>
+    </header>
+
+    <div class="content">
+        <div class="wait_content">
+            <div id="w_check">
+
+                <div class="wait_body">
+                    <div id="wait_phone">
+
+                        <div>
+                            <p align="center" style="font-size:25px; font-weight:900; color:black" id="test">전화번호 입력</p>
+                        </div>
+                        <div class="text_class">
+                            <div id="text_div"></div>
+                        </div>
+                        <div class="wrap">
+                            <div class="phone_box">
+                            </div>
+                        </div>
+
+                    </div> <!--end "#w_check"-->
+                </div> <!--end "#wait_content"-->
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script>
+
+    var phoneNum = '';
+    var today = '';
+
+
+    $(document).ready(function () {
+
+        getDateInfo();       //날짜 받아오는 함수
+        btnPhonNumber();     //번호grid 불러오는 함수
+
+        var wCheck = document.querySelector("#w_check");
+
+    });
+
+
+    function inputNumber(e) {
+        var num = event.target.value;
+
+        if (phoneNum.length == 3 || phoneNum.length == 8) {
+            phoneNum += '-';
+        } else if (num == 'reset') {
+            this.phoneNum = '';
+        } else if (num == 'checkin') {
+            alert("제출하기");
+        } else if (phoneNum.length < 13) {
+            phoneNum += num;
+        } else {
+            alert("가능한 입력범위를 초과했습니다.");
+        }
+        document.querySelector("#text_div").innerHTML = phoneNum;
+    };
+
+    function btnPhonNumber() {
+        var phoneBox = document.querySelector(".phone_box");
+        var ihtml = '';
+        for (var i = 0; i < 12; i++) {
+            if (i == 9) {
+                ihtml += `<button class="items" onclick="inputNumber(this)" value=reset>전체지움</button>`;
+            } else if (i == 10) {
+                ihtml += `<button class="items" onclick="inputNumber(this)" value=0>0</button>`;
+            } else if (i == 11) {
+                ihtml += `<button class="items" onclick="inputNumber(this)" value=checkin>(하나지우기 아이콘)</button>`;
+            } else {
+                ihtml += `<button class="items" onclick="inputNumber(this)" value=${i + 1}>${i + 1}</button>`;
+            }
+        }
+        ihtml += `<button class="items" onclick="inputNumber(this)" value='check'>확인</button>`
+        phoneBox.innerHTML = ihtml;
+    };
+
+
+    function getDateInfo() {
+
+        date = new Date();
+        var dd = new String(date.getDate());
+        var mm = new String(date.getMonth() + 1);
+        var yyyy = date.getFullYear();
+        var hour = new String(date.getHours());
+        var minute = new String(date.getMinutes());
+        var ss = new String(date.getSeconds());
+
+        today = yyyy + '년 ' + mm + '월 ' + dd + '일 ' + hour + '시 ' + minute + '분 ' + ss + '초';
+
+        var todayInfo = document.querySelector("#today");
+        todayInfo.innerHTML = today;
+    }
+
+</script>
