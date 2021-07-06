@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 class="h1-clock"></h1>
+
+    <script>
+        var clock = document.querySelector('.h1-clock');
+        console.log(new Date())
+        getTime();
+        init();
+
+        function getTime(){
+            const time = new Date();
+
+            const year = time.getFullYear();
+            const month = time.getMonth();
+            const date = time.getDate();
+            const day = time.getDay();
+            const hour = time.getHours();
+            const min = time.getMinutes();
+            const sec = time.getSeconds();
+
+            var week = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
+            tDay = week[day];
+
+            const todayDate = `${year}년 ` + `${month<10?`0${month}`:month}월 ` + `${date<10?`0${date}`:date}일 ` + `${tDay}`   /* 3항연산자 사용-> 한자리 수 앞에 +0 */
+            const realTime = ` ${hour<10?`0${hour}`:hour}:${min<10?`0${min}`:min}:${sec<10?`0${sec}`:sec}`
+            clock.innerHTML =  todayDate
+            clock.innerHTML += realTime
+        }
+
+        function init(){
+            setInterval(getTime, 1000);
+        }
+
+        /* POINT1 : 10이하인 경우 앞에 +0  EX) 1이 아니라 01 형식으로 */
+        /* POINT2 : setIntervl() 함수 사용해서 1초마다 1번씩 갱신 */
+    </script>
+</body>
+</html>
