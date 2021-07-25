@@ -16,13 +16,17 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
 
-        const api_key='#######api_key#######'    /*api_수정*/
+        const api_key='f399bb19c774558fa7bb66e5948f85d6'    /*api_수정*/
         const local = 'Seoul'
+        
+        /*파라메터 추가( lang: 언어, units=metric(화씨를 섭씨로) */
+        lang="kr" /*lang=${kr}*/
+        
 
         $.ajax({
             dataType:'json'
             ,type:'GET'
-            ,url: `https://api.openweathermap.org/data/2.5/weather?q=mokpo&appid=${api_key}` 
+            ,url: `https://api.openweathermap.org/data/2.5/weather?q=mokpo&appid=${api_key}&lang=${lang}&units=metric` 
             ,data: {
                 q: `${local}`
                 ,appid: `${api_key}`
@@ -38,7 +42,7 @@
             
             const icon = data.weather[0].icon;
             $('#icon').attr("src",`http://openweathermap.org/img/wn/${icon}.png`);
-            $('#temp').html(data.coord.lat);
+            $('#temp').html(data.main.temp);
         }
            /* api_key는 OpenWeather 홈페이지에서 받아와야 한다 */
            /* attr() : 요소의 속성 값을 가져오거나 속성을 추가한다 */
