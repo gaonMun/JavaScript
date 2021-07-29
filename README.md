@@ -1,8 +1,8 @@
 # javaScript
 JavaScript Project _ basic
 
- 1. ajax json형식으로 출력
+ 1.ajax_json: ajax 활용 test
 
- 2. 채팅화면 만들기
+ 2.chatting: 채팅화면 만들기
 
- 3. small test
+ 3.small_texting_box: small test 모음
